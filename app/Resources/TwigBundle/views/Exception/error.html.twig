@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+{% block  header %}
+    {% include '::exception_header.html.twig' %}
+{% endblock %}
+{% block body %}
+    <div class="container" style="margin-top: 10px">
+        <br>
+        <div class="row">
+            <h1>Ката табылды!</h1>
+            <h3>Сервер "{{ status_code }} {{ status_text }}" жообун кайтарды.</h3>
+
+            <h1>Ошибка обнаружена!</h1>
+            <h3>Сервер вернул ошибку "{{ status_code }} {{ status_text }}".</h3>
+        </div>
+    </div>
+
+{% endblock %}

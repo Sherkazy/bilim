@@ -1,0 +1,56 @@
+{% include 'moderator/meta_header.html.twig' %}
+
+<div class="container body">
+    <div class="main_container">
+        {% block body %}
+            {% block left_col %}
+                <div class="col-md-3 left_col">
+                    <div class="left_col scroll-view">
+                        <div class="navbar nav_title" style="border: 0;">
+                            <a href="{{ path('md_main_homepage') }}" class="site_title">
+                                <img src="{{ asset('apple-touch-icon.png') }}" alt="Moderator panel">
+                                {#<span>Жогорку Кеңеш</span>#}
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <br/>
+
+                        <!-- sidebar menu -->
+                        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                            <div class="menu_section">
+                                <h3></h3>
+                                {% block category %}
+                                    {{ render(controller('MdCategoryBundle:Category:list')) }}
+                                {% endblock %}
+                            </div>
+
+                        </div>
+                        <!-- /sidebar menu -->
+
+                    </div>
+                </div>
+
+            {% endblock %}
+            {% include 'moderator/top_nav.html.twig' %}
+            {% block top_nav %}
+
+            {% endblock %}
+
+            {% block right_col %}
+                <div class="right_col" role="main">
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            {% block table_content %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+
+        {% endblock %}
+    </div>
+</div>
+{% include 'moderator/meta_footer.html.twig' %}

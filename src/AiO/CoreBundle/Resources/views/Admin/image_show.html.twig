@@ -1,0 +1,8 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+{% block field %}
+
+	{% if value %}
+		<img src="{% path value, 'big' %}" style="max-width: 600px">
+	{% endif %}
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends  '::base.html.twig' %}
+{% block  header %}
+    {% include '::exception_header.html.twig' %}
+{% endblock %}
+{% block body %}
+    <div class="container" style="margin-top: 10px">
+        <br>
+        <div class="row">
+            <h1>Баракча табылган жок!</h1>
+            <h3>Баракчанын адреси туура эмес кирилди же баракча иштелип жаткан болушу мүмкүн.</h3>
+
+            <h1>Страница не найдена!</h1>
+            <h3>Возможно был введен неправильный адрес или страница находится в разработке.</h3>
+        </div>
+    </div>
+{% endblock %}

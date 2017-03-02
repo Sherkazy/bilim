@@ -1,0 +1,12 @@
+services:
+#    AiO_core.example:
+#        class: AiO\CoreBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    sonata.media.resizer.custom:
+        class: AiO\CoreBundle\Image\CustomResizer
+        arguments: [@sonata.media.adapter.image.gd, 'outbound', @sonata.media.metadata.proxy]
+
+    aio_core.service:
+        class: AiO\CoreBundle\Services\CoreService
+        arguments: []

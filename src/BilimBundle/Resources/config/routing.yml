@@ -1,0 +1,3 @@
+bilim_homepage:
+    path:     /
+    defaults: { _controller: BilimBundle:Default:index }

@@ -1,0 +1,59 @@
+#logout:hover{
+  text-decoration: underline;
+  cursor: pointer;
+  color: #337ab7;
+}
+#info_newsbundle_newsmoderator_coverPhoto label{
+  display: none;
+}
+#info_fraction_bundle_fraction_moderator_coverPhoto label{
+  display: none;
+}
+#info_gallerybundle_photo_gallery_moderator_coverPhoto label{
+  display: none;
+}
+#info_gallerybundle_video_gallery_moderator_coverPhoto label{
+  display: none;
+}
+#info_peoplebundle_peoplemoderator_photo label{
+  display: none;
+}
+
+#info_committee_bundle_committee_moderator_coverPhoto label{
+  display: none;
+}
+#info_articlebundle_articlemoderator_coverPhoto label{
+  display: none;
+}
+
+#info_deputybundle_deputy_photo label{
+  display: none;
+}
+
+.a-section{
+  margin-right: 10px;
+}
+.x_form label{
+  margin-top: 10px;
+}
+/*
+.file-footer-buttons .kv-file-upload{
+  display: none;
+}*/
+#post_tags strong, br{
+  display: none;
+}
+.site_title:hover{
+  text-decoration: underline;
+}
+
+.site_title{
+  text-align: center;
+}
+.site_title img{
+  width: 60%;
+}
+
+p.caution{
+  color: red;
+}
