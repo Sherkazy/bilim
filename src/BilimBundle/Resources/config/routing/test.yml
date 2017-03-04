@@ -1,0 +1,24 @@
+test_index:
+    path:     /
+    defaults: { _controller: "BilimBundle:Test:index" }
+    methods:  GET
+
+test_show:
+    path:     /{id}/show
+    defaults: { _controller: "BilimBundle:Test:show" }
+    methods:  GET
+
+test_new:
+    path:     /new
+    defaults: { _controller: "BilimBundle:Test:new" }
+    methods:  [GET, POST]
+
+test_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BilimBundle:Test:edit" }
+    methods:  [GET, POST]
+
+test_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BilimBundle:Test:delete" }
+    methods:  DELETE

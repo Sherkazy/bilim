@@ -1,3 +1,32 @@
-bilim_homepage:
-    path:     /
-    defaults: { _controller: BilimBundle:Default:index }
+bilim_bilim:
+    resource: "@BilimBundle/Resources/config/routing/bilim.yml"
+    prefix:   /bilim
+
+bilim_sudent:
+    resource: "@BilimBundle/Resources/config/routing/student.yml"
+    prefix:   /student
+
+bilim_region:
+    resource: "@BilimBundle/Resources/config/routing/region.yml"
+    prefix:   /region
+
+bilim_exam:
+    resource: "@BilimBundle/Resources/config/routing/exam.yml"
+    prefix:   /exam
+
+bilim_subject:
+    resource: "@BilimBundle/Resources/config/routing/subject.yml"
+    prefix:   /subject
+
+bilim_suroo:
+    resource: "@BilimBundle/Resources/config/routing/suroo.yml"
+    prefix:   /suroo
+
+bilim_test:
+    resource: "@BilimBundle/Resources/config/routing/test.yml"
+    prefix:   /test
+
+bilim_type:
+    resource: "@BilimBundle/Resources/config/routing/type.yml"
+    prefix:   /type
+

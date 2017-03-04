@@ -29,6 +29,14 @@ class Type
     private $name;
 
 
+
+    public function __toString()
+    {
+        return $this->getName();
+        // TODO: Implement __toString() method.
+    }
+
+
     /**
      * Get id
      *

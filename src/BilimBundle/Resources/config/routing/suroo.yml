@@ -1,0 +1,24 @@
+suroo_index:
+    path:     /
+    defaults: { _controller: "BilimBundle:Suroo:index" }
+    methods:  GET
+
+suroo_show:
+    path:     /{id}/show
+    defaults: { _controller: "BilimBundle:Suroo:show" }
+    methods:  GET
+
+suroo_new:
+    path:     /new
+    defaults: { _controller: "BilimBundle:Suroo:new" }
+    methods:  [GET, POST]
+
+suroo_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BilimBundle:Suroo:edit" }
+    methods:  [GET, POST]
+
+suroo_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BilimBundle:Suroo:delete" }
+    methods:  DELETE

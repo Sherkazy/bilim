@@ -35,6 +35,12 @@ class Region
      */
     private $percentage;
 
+    public function __toString()
+    {
+        return $this->getName();
+        // TODO: Implement __toString() method.
+    }
+
 
     /**
      * Get id

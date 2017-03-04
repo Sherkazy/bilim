@@ -21,7 +21,6 @@ class Suroo
      */
     private $id;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="BilimBundle\Entity\Subject", cascade={"persist"})
      * @ORM\JoinColumns({

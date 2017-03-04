@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Suroos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Difficulty</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for suroo in suroos %}
+            <tr>
+                <td><a href="{{ path('suroo_show', { 'id': suroo.id }) }}">{{ suroo.id }}</a></td>
+                <td>{{ suroo.difficulty }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('suroo_show', { 'id': suroo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('suroo_edit', { 'id': suroo.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('suroo_new') }}">Create a new suroo</a>
+        </li>
+    </ul>
+{% endblock %}

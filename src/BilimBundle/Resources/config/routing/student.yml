@@ -1,0 +1,24 @@
+student_index:
+    path:     /
+    defaults: { _controller: "BilimBundle:Student:index" }
+    methods:  GET
+
+student_show:
+    path:     /{id}/show
+    defaults: { _controller: "BilimBundle:Student:show" }
+    methods:  GET
+
+student_new:
+    path:     /new
+    defaults: { _controller: "BilimBundle:Student:new" }
+    methods:  [GET, POST]
+
+student_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BilimBundle:Student:edit" }
+    methods:  [GET, POST]
+
+student_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BilimBundle:Student:delete" }
+    methods:  DELETE

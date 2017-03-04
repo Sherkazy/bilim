@@ -1,0 +1,24 @@
+subject_index:
+    path:     /
+    defaults: { _controller: "BilimBundle:Subject:index" }
+    methods:  GET
+
+subject_show:
+    path:     /{id}/show
+    defaults: { _controller: "BilimBundle:Subject:show" }
+    methods:  GET
+
+subject_new:
+    path:     /new
+    defaults: { _controller: "BilimBundle:Subject:new" }
+    methods:  [GET, POST]
+
+subject_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BilimBundle:Subject:edit" }
+    methods:  [GET, POST]
+
+subject_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BilimBundle:Subject:delete" }
+    methods:  DELETE

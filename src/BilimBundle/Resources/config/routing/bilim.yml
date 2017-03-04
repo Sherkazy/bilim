@@ -1,0 +1,24 @@
+bilim_index:
+    path:     /
+    defaults: { _controller: "BilimBundle:Bilim:index" }
+    methods:  GET
+
+bilim_show:
+    path:     /{id}/show
+    defaults: { _controller: "BilimBundle:Bilim:show" }
+    methods:  GET
+
+bilim_new:
+    path:     /new
+    defaults: { _controller: "BilimBundle:Bilim:new" }
+    methods:  [GET, POST]
+
+bilim_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BilimBundle:Bilim:edit" }
+    methods:  [GET, POST]
+
+bilim_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BilimBundle:Bilim:delete" }
+    methods:  DELETE
