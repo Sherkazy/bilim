@@ -2,6 +2,7 @@
 
 namespace BilimBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,12 +32,16 @@ class Exam
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="BilimBundle\Entity\Suroo",cascade={"persist"})
-     * @ORM\JoinColumns({
-     * @ORM\JoinColumn(name="suroo_id", referencedColumnName="id")
-     * })
+     * @var string
+     *
+     * @ORM\Column(name="suroo", type="array", nullable=true)
      */
     private $suroo;
+
+    public function __construct() {
+        $suroo = array();
+        $this->suroo = $suroo;
+    }
 
 
     /**

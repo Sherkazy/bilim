@@ -72,6 +72,12 @@ class Student
         return $this->getName();
         // TODO: Implement __toString() method.
     }
+    public function __construct()
+    {
+        $this->science = 0.0;
+        $this->humanitary = 0.0;
+        $this->general = 0.0;
+    }
 
 
     /**
@@ -105,51 +111,6 @@ class Student
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set state
-     *
-     * @param integer $state
-     * @return Student
-     */
-    public function setState($state)
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-
-    /**
-     * Set average
-     *
-     * @param float $average
-     * @return Student
-     */
-    public function setAverage($average)
-    {
-        $this->average = $average;
-
-        return $this;
-    }
-
-    /**
-     * Get average
-     *
-     * @return float
-     */
-    public function getAverage()
-    {
-        return $this->average;
-    }
-
-    /**
-     * @return float
-     */
-    public function getScience()
-    {
-        return $this->science;
     }
 
     /**
@@ -222,5 +183,13 @@ class Student
     public function setRegion($region)
     {
         $this->region = $region;
+    }
+
+    /**
+     * @return float
+     */
+    public function getScience()
+    {
+        return $this->science;
     }
 }

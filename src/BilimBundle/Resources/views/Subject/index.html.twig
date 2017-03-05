@@ -7,7 +7,8 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Предмент</th>
+                <th>Тип предмент</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -16,6 +17,7 @@
             <tr>
                 <td><a href="{{ path('subject_show', { 'id': subject.id }) }}">{{ subject.id }}</a></td>
                 <td>{{ subject.name }}</td>
+                <td>{{ subject.type }}</td>
                 <td>
                     <ul>
                         <li>

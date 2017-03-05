@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <hr>
+    <form action="{{ path('student_generate_random') }}" method="post">
+        <select class="form-control" name="test" id="test">
+            {% for entity in tests %}
+                <option value="{{ entity.id }}">{{ entity.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+            <button type="submit" class="btn btn-primary">Generate Students</button>
+    </form>
+    <hr>
+{% endblock %}
+

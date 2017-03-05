@@ -1,24 +1,45 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <h3>Тест боюнча сорттоо</h3>
+    <div class="row" style="">
+        <div class="col-md-12">
+            <a href="{{ path('student_generator') }}">
+                <button type="button" class="btn btn-primary">Generate Students</button>
+            </a>
+            {{ render(controller('BilimBundle:Test:list')) }}
+
+        </div>
+    </div>
+    <hr>
     <h1>Students list</h1>
 
+    <div class="col-xs-12 text-center">
+        <div class="navigation">
+            {{ knp_pagination_render(students) }}
+        </div>
+    </div>
+    <hr>
     <table>
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Science</th>
-                <th>Humanitary</th>
-                <th>General</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>ТЕСТ</th>
+            <th>Область</th>
+            <th>Science</th>
+            <th>Humanitary</th>
+            <th>General</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for student in students %}
             <tr>
                 <td><a href="{{ path('student_show', { 'id': student.id }) }}">{{ student.id }}</a></td>
                 <td>{{ student.name }}</td>
+                <td>{{ student.test }}</td>
+                <td>{{ student.region }}</td>
                 <td>{{ student.science }}</td>
                 <td>{{ student.humanitary }}</td>
                 <td>{{ student.general }}</td>
@@ -36,7 +57,7 @@
         {% endfor %}
         </tbody>
     </table>
-
+    <hr>
     <ul>
         <li>
             <a href="{{ path('student_new') }}">Create a new student</a>

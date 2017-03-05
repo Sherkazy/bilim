@@ -13,7 +13,34 @@ class ExamType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('test')->add('suroo')        ;
+        global $kernel;
+
+        if ( 'AppCache' == get_class($kernel) )
+        {
+            $kernel = $kernel->getKernel();
+        }
+        $doctrine = $kernel->getContainer()->get( 'doctrine' );
+
+        $entities=$doctrine->getRepository('BilimBundle:Suroo')
+            ->findAll();
+
+
+        $suroo = array();
+
+        foreach ($entities as $entity){
+            $suroo[$entity->getId()] = $entity->getId();
+        }
+
+        $builder
+            ->add('test')
+            ->add('suroo', 'choice', array(
+                'label' => 'Суроолор',
+                'choices' => $suroo,
+                'multiple' => true,
+                'required' => false,
+                'expanded' => true
+            ))
+        ;
     }
     
     /**

@@ -9,6 +9,17 @@
                 <th>Id</th>
                 <td>{{ exam.id }}</td>
             </tr>
+            <tr>
+                <th>Тест</th>
+                <td>{{ exam.test }}</td>
+            </tr>
+            <tr>
+                <th>Суроолор</th>
+                {% for entity in suroo %}
+
+                    <td>{{ entity }}-суроо</td>
+                {% endfor %}
+            </tr>
         </tbody>
     </table>
 

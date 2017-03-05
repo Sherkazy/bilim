@@ -127,4 +127,11 @@ class TestController extends Controller
             ->getForm()
         ;
     }
+
+    public function listAction()
+    {
+        $tests = $this->getDoctrine()->getRepository('BilimBundle:Test')
+            ->findBy(array(), array('id' => 'DESC'));
+        return $this->render('BilimBundle:Test:list.html.twig',array('tests'=>$tests));
+    }
 }

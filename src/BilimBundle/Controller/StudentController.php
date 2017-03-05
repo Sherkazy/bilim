@@ -3,6 +3,7 @@
 namespace BilimBundle\Controller;
 
 use BilimBundle\Entity\Student;
+use BilimBundle\Entity\Test;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -20,14 +21,28 @@ class StudentController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $students = $em->getRepository('BilimBundle:Student')->findAll();
+        $students = $em->getRepository('BilimBundle:Student')->findBy(array(),array('id'=>'DESC'));
 
         $request = new Request();
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $students, $request->query->getInt('page', 1), 20
+            $students, $request->query->getInt('page', 1), 10
         );
 
+        return $this->render('BilimBundle:Student:index.html.twig', array(
+            'students' => $pagination,
+        ));
+    }
+
+    public function listByTestAction(Test $test)
+    {
+        $students = $this->getDoctrine()->getRepository('BilimBundle:Student')
+            ->findByTest($test);
+        $request = new Request();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $students, $request->query->getInt('page', 1), 10
+        );
         return $this->render('BilimBundle:Student:index.html.twig', array(
             'students' => $pagination,
         ));
@@ -55,6 +70,35 @@ class StudentController extends Controller
             'student' => $student,
             'form' => $form->createView(),
         ));
+    }
+
+    public function randomGenerateAction()
+    {
+        $test = $_POST['test'];
+        $test = $this->getDoctrine()->getRepository('BilimBundle:Test')->find($test);
+        $region = $this->getDoctrine()->getRepository('BilimBundle:Region')->find(1);
+//        $numbers = range(1, 20);
+//        shuffle($numbers);
+//        $number = array_shift($numbers);
+//        dump($number);
+        $em = $this->getDoctrine()->getManager();
+        $size =1000;
+        for ($item = 1; $item <= $size; $item++) {
+            $numbers = range(1, 9);
+//            shuffle($numbers);
+            $number = array_shift($numbers);
+            $region = $this->getDoctrine()->getRepository('BilimBundle:Region')->find($number);
+            $student = new Student();
+            $student->setName('Student' . $item);
+            $student->setTest($test);
+            $student->setRegion($region);
+            $em->persist($student);
+            if ($item % 100 == 0 || $item == $size){
+                $em->flush();
+            }
+        }
+        return $this->redirect($this->generateUrl('student_index'));
+
     }
 
     /**
@@ -94,6 +138,12 @@ class StudentController extends Controller
         ));
     }
 
+    public function generatorAction()
+    {
+        $tests = $this->getDoctrine()->getRepository('BilimBundle:Test')->findAll();
+        return $this->render('BilimBundle:Student:generator.html.twig', array('tests' => $tests));
+    }
+
     /**
      * Deletes a student entity.
      *
@@ -124,7 +174,6 @@ class StudentController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('student_delete', array('id' => $student->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

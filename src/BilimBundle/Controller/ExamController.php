@@ -64,7 +64,14 @@ class ExamController extends Controller
     {
         $deleteForm = $this->createDeleteForm($exam);
 
+        $suroos = $this->getDoctrine()->getRepository('BilimBundle:Suroo')->findAll();
+        $suroo = array();
+
+        foreach ($exam->getSuroo() as $entity){
+            $suroo[$entity] = $entity;
+        }
         return $this->render('BilimBundle:Exam:show.html.twig', array(
+            'suroo' => $suroo,
             'exam' => $exam,
             'delete_form' => $deleteForm->createView(),
         ));

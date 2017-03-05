@@ -3,6 +3,7 @@
 namespace BilimBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Test
@@ -41,6 +42,10 @@ class Test
     {
         return $this->getName();
         // TODO: Implement __toString() method.
+    }
+    public function __construct()
+    {
+        $this->date = new \DateTime();
     }
 
 

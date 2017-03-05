@@ -1,0 +1,7 @@
+{#<hr>#}
+
+        {% for entity in tests %}
+            <a href="{{ path('student_list_by_test', {id:entity.id}) }}">
+                <button type="button" class="btn btn-success">{{ entity }}</button>
+            </a>
+        {% endfor %}

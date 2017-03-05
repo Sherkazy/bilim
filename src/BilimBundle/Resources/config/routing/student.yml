@@ -22,3 +22,16 @@ student_delete:
     path:     /{id}/delete
     defaults: { _controller: "BilimBundle:Student:delete" }
     methods:  DELETE
+    methods:  [GET, POST]
+
+student_list_by_test:
+    path:     /list/by/{id}
+    defaults: { _controller: "BilimBundle:Student:listByTest" }
+
+student_generator:
+    path:     /generator/by/test
+    defaults: { _controller: "BilimBundle:Student:generator" }
+
+student_generate_random:
+    path:     /generator/random
+    defaults: { _controller: "BilimBundle:Student:randomGenerate" }

@@ -7,6 +7,8 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Студент</th>
+                <th>Суроо</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -14,6 +16,8 @@
         {% for bilim in bilims %}
             <tr>
                 <td><a href="{{ path('bilim_show', { 'id': bilim.id }) }}">{{ bilim.id }}</a></td>
+                <td><a href="{{ path('student_show', { 'id': bilim.student.id }) }}">{{ bilim.student }}</a></td>
+                <td><a href="{{ path('suroo_show', { 'id': bilim.suroo.id }) }}">{{ bilim.suroo.id }}</a></td>
                 <td>
                     <ul>
                         <li>

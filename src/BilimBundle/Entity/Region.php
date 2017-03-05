@@ -41,7 +41,6 @@ class Region
         // TODO: Implement __toString() method.
     }
 
-
     /**
      * Get id
      *
