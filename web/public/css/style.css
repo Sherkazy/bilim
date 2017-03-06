@@ -6,3 +6,13 @@ td{
     padding-left: 20px;
     text-align: center;
 }
+table{
+    text-align: center;
+}
+.center-content{
+    text-align: center;
+}
+.center-content table{
+    margin-left: auto;
+    margin-right: auto;
+}

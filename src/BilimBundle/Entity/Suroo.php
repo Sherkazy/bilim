@@ -30,12 +30,6 @@ class Suroo
     private $subject;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BilimBundle\Entity\Suroo", inversedBy="suroo")
-     * @ORM\JoinColumn(name="exam_id", referencedColumnName="id")
-     */
-    private $exam;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="difficulty", type="integer")
@@ -88,21 +82,5 @@ class Suroo
     public function setDifficulty($difficulty)
     {
         $this->difficulty = $difficulty;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getExam()
-    {
-        return $this->exam;
-    }
-
-    /**
-     * @param mixed $exam
-     */
-    public function setExam($exam)
-    {
-        $this->exam = $exam;
     }
 }
