@@ -5,6 +5,7 @@ namespace BilimBundle\Controller;
 use BilimBundle\Entity\Suroo;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGenerator;
 
 /**
  * Suroo controller.
@@ -21,15 +22,21 @@ class SurooController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $suroos = $em->getRepository('BilimBundle:Suroo')->findAll();
-
+//        $paginator  = $this->get('knp_paginator');
+//        $pagination = $paginator->paginate(
+//            $query, /* query NOT result */
+//            $request->query->getInt('page', 1)/*page number*/,
+//            10/*limit per page*/
+//        );
         $request = new Request();
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $suroos, $request->query->getInt('page', 1), 20
-        );
+//        $paginator = $this->get('knp_paginator');
+//        $pagination = $paginator->paginate(
+//            $suroos,
+//            $request->query->getInt('page', 1), 20
+//        );
 
         return $this->render('BilimBundle:Suroo:index.html.twig', array(
-            'suroos' => $pagination,
+            'suroos' => $suroos,
         ));
     }
 
@@ -127,4 +134,32 @@ class SurooController extends Controller
             ->getForm()
         ;
     }
+
+    public function generateAction()
+    {
+        $subject = $this->getDoctrine()->getRepository('BilimBundle:Subject')->findAll();
+        return $this->render('BilimBundle:Suroo:gererate.html.twig', array('entities'=>$subject));
+    }
+
+    public function generateRandomAction()
+    {
+        $count = $_POST['count'];
+        $subject_id = $_POST['subject'];
+        $subject = $this->getDoctrine()->getRepository('BilimBundle:Subject')->find($subject_id);
+//        $numbers = range(1, 3);
+        $em = $this->getDoctrine()->getManager();
+        for ($item=0; $item<$count; $item++)
+        {
+//            $number = rand(1,3);
+            $suroo = new Suroo();
+            $suroo->setSubject($subject);
+            $suroo->setDifficulty(($item%3)+1);
+            $em->persist($suroo);
+        }
+        $em->flush();
+        return $this->redirect($this->generateUrl('suroo_index'));
+
+    }
+
+
 }

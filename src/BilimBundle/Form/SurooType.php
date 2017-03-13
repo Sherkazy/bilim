@@ -13,7 +13,11 @@ class SurooType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('difficulty')->add('subject')        ;
+        $builder
+            ->add('difficulty')
+            ->add('subject')
+//            ->add('counter', 'number', array('label'=>'Количество'))
+        ;
     }
     
     /**

@@ -31,7 +31,7 @@ class Student
     /**
      * @ORM\ManyToOne(targetEntity="BilimBundle\Entity\Region",cascade={"persist"})
      * @ORM\JoinColumns({
-     * @ORM\JoinColumn(name="region_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="region_id", referencedColumnName="id", onDelete="SET NULL")
      * })
      */
     private $region;

@@ -1,20 +1,43 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Suroos list</h1>
+    <hr/>
+    <div class="row" style="">
+        <div class="col-md-12">
+            <a href="{{ path('suroo_generate') }}">
+                <button type="button" class="btn btn-primary">Generate Questions</button>
+            </a>
+            {#{{ render(controller('SurooBundle:Suroo:generate')) }}#}
 
+        </div>
+    </div>
+    <hr>
+
+    <h1>Suroos list </h1>
+
+    {#<div class="col-xs-12 text-center">#}
+        {#<div class="navigation">#}
+            {#{{ knp_pagination_render(suroos) }}#}
+        {#</div>#}
+    {#</div>#}
+    <hr>
     <table>
         <thead>
-            <tr>
-                <th>Суроо</th>
-                <th>Difficulty</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            {#<th>{{ knp_pagination_sortable(suroos, 'Суроо', 'a.id') }}</th>#}
+            {#<th>{{ knp_pagination_sortable(suroos, 'Предмет', 'a.subject') }}</th>#}
+            {#<th>{{ knp_pagination_sortable(suroos, 'Difficulty', 'a.Difficulty') }}</th>#}
+            <th>Суроо</th>
+            <th>Предмет</th>
+            <th>Difficulty</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for suroo in suroos %}
             <tr>
                 <td><a href="{{ path('suroo_show', { 'id': suroo.id }) }}">{{ suroo.id }}</a></td>
+                <td>{{ suroo.subject }}</td>
                 <td>{{ suroo.difficulty }}</td>
                 <td>
                     <ul>

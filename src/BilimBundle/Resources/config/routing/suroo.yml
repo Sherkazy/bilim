@@ -22,3 +22,11 @@ suroo_delete:
     path:     /{id}/delete
     defaults: { _controller: "BilimBundle:Suroo:delete" }
     methods:  DELETE
+
+suroo_generate_random:
+    path:     /generate/quesetions
+    defaults: { _controller: "BilimBundle:Suroo:generateRandom" }
+
+suroo_generate:
+    path:     /generate/suroo
+    defaults: { _controller: "BilimBundle:Suroo:generate" }

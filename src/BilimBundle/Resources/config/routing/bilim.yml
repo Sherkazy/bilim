@@ -22,3 +22,7 @@ bilim_delete:
     path:     /{id}/delete
     defaults: { _controller: "BilimBundle:Bilim:delete" }
     methods:  DELETE
+
+bilim_generator:
+    path:     /bilim/generate
+    defaults: { _controller: "BilimBundle:Bilim:generate" }

@@ -77,16 +77,10 @@ class StudentController extends Controller
         $test = $_POST['test'];
         $test = $this->getDoctrine()->getRepository('BilimBundle:Test')->find($test);
         $region = $this->getDoctrine()->getRepository('BilimBundle:Region')->find(1);
-//        $numbers = range(1, 20);
-//        shuffle($numbers);
-//        $number = array_shift($numbers);
-//        dump($number);
         $em = $this->getDoctrine()->getManager();
-        $size =1000;
+        $size = 1000;
         for ($item = 1; $item <= $size; $item++) {
             $numbers = range(1, 9);
-//            shuffle($numbers);
-            $number = array_shift($numbers);
             $region = $this->getDoctrine()->getRepository('BilimBundle:Region')->find($number);
             $student = new Student();
             $student->setName('Student' . $item);

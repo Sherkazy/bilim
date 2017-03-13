@@ -24,7 +24,7 @@ class Bilim
     /**
      * @ORM\ManyToOne(targetEntity="BilimBundle\Entity\Suroo",cascade={"persist"})
      * @ORM\JoinColumns({
-     * @ORM\JoinColumn(name="suroo_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="suroo_id", referencedColumnName="id", onDelete="SET NULL")
      * })
      */
     private $suroo;
@@ -32,7 +32,7 @@ class Bilim
     /**
      * @ORM\ManyToOne(targetEntity="BilimBundle\Entity\Student",cascade={"persist"})
      * @ORM\JoinColumns({
-     * @ORM\JoinColumn(name="student_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="student_id", referencedColumnName="id", onDelete="SET NULL")
      * })
      */
     private $student;

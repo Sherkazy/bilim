@@ -25,7 +25,7 @@ class Exam
     /**
      * @ORM\ManyToOne(targetEntity="BilimBundle\Entity\Test",cascade={"persist"})
      * @ORM\JoinColumns({
-     * @ORM\JoinColumn(name="test_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="test_id", referencedColumnName="id", onDelete="SET NULL")
      * })
      */
     private $test;

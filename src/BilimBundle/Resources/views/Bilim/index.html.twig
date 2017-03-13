@@ -1,6 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <hr/>
+    <form action="{{ path('bilim_generator') }}" method="post">
+        <select class="form-control" name="test" id="test">
+            {% for entity in tests %}
+                <option value="{{ entity.id }}">{{ entity.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit" class="btn btn-primary">Generate Bilim</button>
+    </form>
+    <hr>
     <h1>Bilims list</h1>
 
     <table>

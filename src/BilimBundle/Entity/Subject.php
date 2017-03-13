@@ -31,7 +31,7 @@ class Subject
     /**
      * @ORM\ManyToOne(targetEntity="BilimBundle\Entity\Type",cascade={"persist"})
      * @ORM\JoinColumns({
-     * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="type_id", referencedColumnName="id", onDelete="SET NULL")
      * })
      */
     private $type;

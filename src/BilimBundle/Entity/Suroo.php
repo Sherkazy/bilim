@@ -24,7 +24,7 @@ class Suroo
     /**
      * @ORM\ManyToOne(targetEntity="BilimBundle\Entity\Subject", cascade={"persist"})
      * @ORM\JoinColumns({
-     * @ORM\JoinColumn(name="subject_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="subject_id", referencedColumnName="id", onDelete="SET NULL")
      * })
      */
     private $subject;

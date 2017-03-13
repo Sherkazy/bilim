@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <hr>
+    <form action="{{ path('suroo_generate_random') }}" method="post">
+        <select class="form-control" name="subject" id="test">
+            {% for entity in entities %}
+                <option value="{{ entity.id }}">{{ entity.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="number" name="count"/>
+        <br>
+        <button type="submit" class="btn btn-primary">Generate questions</button>
+    </form>
+    <hr>
+{% endblock %}
+

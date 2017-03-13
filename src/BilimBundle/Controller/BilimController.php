@@ -20,6 +20,7 @@ class BilimController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $request = new Request();
+        $test = $this->getDoctrine()->getRepository('BilimBundle:Test')->findAll();
         $bilims = $em->getRepository('BilimBundle:Bilim')->findAll();
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
@@ -28,6 +29,7 @@ class BilimController extends Controller
 
         return $this->render('BilimBundle:Bilim:index.html.twig', array(
             'bilims' => $pagination,
+            'tests' => $test
         ));
     }
 
@@ -90,6 +92,91 @@ class BilimController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
+    }
+
+    public function generateAction()
+    {
+        $test = $_POST['test'];
+        $test = $this->getDoctrine()->getRepository('BilimBundle:Test')->find($test);
+        $suroos = $this->getDoctrine()->getRepository('BilimBundle:Suroo')->findAll();
+        $student = $this->getDoctrine()->getRepository('BilimBundle:Student')->findBy(
+            array('test' => $test),
+            array('id' => 'ASC'));
+        $em = $this->getEm();
+        $min = $student[0]->getId();
+        $max = $student[count($student) - 1]->getId();
+
+
+        foreach ($suroos as $item) {
+            $difficulty = $item->getDifficulty();
+            $randomNumbers = range($min, $max);
+            shuffle($randomNumbers);
+            $i = 0;
+            if ($difficulty == 1) {
+                foreach ($randomNumbers as $rand) {
+                    $bilim = new Bilim();
+                    $bilim->setStudent($this->getStu()->find($rand));
+                    $bilim->setSuroo($item);
+                    $em->persist($bilim);
+                    if($i == 100){
+                        $em->flush();
+                    }
+                    $i++;
+                    if(count($randomNumbers)*85/100 == $i){
+                        $em->flush();
+                        break;
+                    }
+                }
+            }
+            if ($difficulty == 2) {
+                foreach ($randomNumbers as $rand) {
+                    $bilim = new Bilim();
+                    $bilim->setStudent($this->getStu()->find($rand));
+                    $bilim->setSuroo($item);
+                    $em->persist($bilim);
+                    if($i == 100){
+                        $em->flush();
+                    }
+                    $i++;
+                    if(count($randomNumbers)*60/100 == $i){
+                        $em->flush();
+                        break;
+                    }
+                }
+            }
+            if ($difficulty == 3) {
+                foreach ($randomNumbers as $rand) {
+                    $bilim = new Bilim();
+                    $bilim->setStudent($this->getStu()->find($rand));
+                    $bilim->setSuroo($item);
+                    $em->persist($bilim);
+                    if($i == 100){
+                        $em->flush();
+                    }
+                    $i++;
+                    if(count($randomNumbers)*35/100 == $i){
+                        $em->flush();
+                        break;
+                    }
+                }
+            }
+        }
+        return $this->redirect($this->generateUrl('bilim_index'));
+    }
+
+    public function getRep()
+    {
+        return $this->getDoctrine()->getRepository('BilimBundle:Bilim');
+    }
+
+    public function getStu()
+    {
+        return $this->getDoctrine()->getRepository('BilimBundle:Student');
+    }
+
+    public function getEm()
+    {
+        return $this->getDoctrine()->getManager();
     }
 
     /**
