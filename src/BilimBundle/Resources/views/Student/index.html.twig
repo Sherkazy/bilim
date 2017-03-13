@@ -27,9 +27,9 @@
             <th>Name</th>
             <th>ТЕСТ</th>
             <th>Область</th>
-            <th>Science</th>
-            <th>Humanitary</th>
-            <th>General</th>
+            <th>{{ knp_pagination_sortable(students, 'Science', 'a.Science') }}</th>
+            <th>{{ knp_pagination_sortable(students, 'Humanitary', 'a.Humanitary') }}</th>
+            <th>{{ knp_pagination_sortable(students, 'General', 'a.General') }}</th>
             <th>Actions</th>
         </tr>
         </thead>

@@ -26,7 +26,7 @@ class StudentController extends Controller
         $request = new Request();
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $students, $request->query->getInt('page', 1), 10
+            $students, $request->query->getInt('page', 1), 999
         );
 
         return $this->render('BilimBundle:Student:index.html.twig', array(
@@ -41,7 +41,7 @@ class StudentController extends Controller
         $request = new Request();
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $students, $request->query->getInt('page', 1), 10
+            $students, $request->query->getInt('page', 1), 999
         );
         return $this->render('BilimBundle:Student:index.html.twig', array(
             'students' => $pagination,
@@ -78,10 +78,10 @@ class StudentController extends Controller
         $test = $this->getDoctrine()->getRepository('BilimBundle:Test')->find($test);
         $region = $this->getDoctrine()->getRepository('BilimBundle:Region')->find(1);
         $em = $this->getDoctrine()->getManager();
-        $size = 1000;
+        $size = 5;
         for ($item = 1; $item <= $size; $item++) {
-            $numbers = range(1, 9);
-            $region = $this->getDoctrine()->getRepository('BilimBundle:Region')->find($number);
+            $numbers = rand(1, 9);
+            $region = $this->getDoctrine()->getRepository('BilimBundle:Region')->find($numbers);
             $student = new Student();
             $student->setName('Student' . $item);
             $student->setTest($test);

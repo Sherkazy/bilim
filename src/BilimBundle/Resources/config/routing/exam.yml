@@ -22,3 +22,7 @@ exam_delete:
     path:     /{id}/delete
     defaults: { _controller: "BilimBundle:Exam:delete" }
     methods:  DELETE
+
+exam_generator:
+    path:     /generate/by/test
+    defaults: { _controller: "BilimBundle:Exam:generate" }

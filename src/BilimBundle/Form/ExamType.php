@@ -35,6 +35,7 @@ class ExamType extends AbstractType
             ->add('test')
             ->add('suroo', 'choice', array(
                 'label' => 'Суроолор',
+//                'attr'=>array('class'=>'col-md-4'),
                 'choices' => $suroo,
                 'multiple' => true,
                 'required' => false,

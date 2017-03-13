@@ -4,8 +4,15 @@
     <h1>Exam creation</h1>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+    {{ form_widget(form.test) }}
+    {#{% for entity in form_widget(form.suroo) %}#}
+            {#<div class="col-md-4">#}
+                {#{% dump entity %}#}
+                {#&#123;&#35;{{ entity }}&#35;&#125;#}
+            {#</div>#}
+    {#{% endfor %}#}
+    {{ form_widget(form.suroo) }}
+    <input type="submit" value="Create"/>
     {{ form_end(form) }}
 
     <ul>
