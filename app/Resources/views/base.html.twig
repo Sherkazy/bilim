@@ -7,8 +7,6 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
 
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 
     <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
     {#<link href="{{ asset('public/css/flexslider.css') }}" rel="stylesheet" type="text/css" />#}
@@ -30,72 +28,27 @@
 
     {% include "::footer.html.twig" %}
 </div>
+
 <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-{#<script src="{{ asset('public/js/bootstrap.min.js') }}" type="text/javascript"></script>#}
+<script src="{{ asset('public/js/bootstrap.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('public/js/jquery.min.js') }}" type="text/javascript"></script>
-{#<script src="{{ asset('public/js/jquery.sticky.js') }}" type="text/javascript"></script>#}
-{#<script src="{{ asset('public/js/parallax.js') }}" type="text/javascript"></script>#}
-{#<script src="{{ asset('public/js/jquery.flexslider-min.js') }}" type="text/javascript"></script>#}
-{#<script src="{{ asset('public/js/jquery.jcarousel.js') }}" type="text/javascript"></script>#}
-{#<script src="{{ asset('public/js/fancySelect.js') }}" type="text/javascript"></script>#}
-{#<script src="{{ asset('public/js/animate.js') }}" type="text/javascript"></script>#}
-{#<script src="{{ asset('public/js/myscript.js') }}" type="text/javascript"></script>#}
-{#<script src="{{ asset('public/js/ajax.js') }}" type="text/javascript"></script>#}
 
-{#<script>#}
-{#$(document).ready(function($){#}
-{#$("#productbundle_cart_submit").attr( "data-url" , '{{ path('success_cart_product') }}' );#}
+<script src="{{ asset('public/js/Chart.bundle.min.js') }}"></script>
+<script src="{{ asset('public/js/Chart.min.js') }}"></script>
+{% block script %}
+{% endblock %}
 
+<script>
+    $.material.init();
+    $.material.ripples();
+    resize = function () {
+        $('.main-section').css("minHeight", $(window).height() - 140);
+        $('.my-card-content').css("height", $(".main-section").height() - 65);
+    };
+    resize();
 
-{#$('form[name="productbundle_cart"]').submit(function (event ) {#}
-
-{#var $items = $('.open-project-link');#}
-{#index = $items.length;#}
-
-{#$('#modal-body').addClass('modal-active');#}
-{#if ($(this).hasClass('active')){#}
-{#}#}
-{#else {#}
-{#lastIndex = index;#}
-{#index = $(this).index();#}
-{#$items.removeClass('active');#}
-{#$(this).addClass('active');#}
-
-{#var myUrl = $(this).find('.open-project').attr("data-url") + " .tover_view_page";#}
-
-{#$('#tovar_content').animate({opacity:0},function(){#}
-{#$("#tovar_content").load(myUrl,function(e){#}
-{#//fancySelect#}
-{#$('.basic').fancySelect();#}
-
-{#});#}
-{#$('#tovar_content').animate({opacity:1});#}
-{#});#}
-
-
-{#//Project Page Open#}
-{#$('#modal-body').show(function(){#}
-{#$('#tovar_content');}).show(2000,function(){#}
-{#$('.element_fade_in').each(function (){#}
-{#$(this).appear(function(){#}
-{#$(this).delay(100).animate({opacity:1,right:"0px"},1000);#}
-{#});#}
-{#});#}
-{#});#}
-{#};#}
-
-
-{#var form = this;#}
-{#event.preventDefault();#}
-{#setTimeout(function () {#}
-{#form.submit();#}
-{#}, 5000); // in milliseconds#}
-
-
-{#});#}
-
-{#});#}
-{#</script>#}
+    $(window).resize(resize);
+</script>
 </body>
 </html>
