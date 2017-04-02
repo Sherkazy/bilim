@@ -35,3 +35,7 @@ student_generator:
 student_generate_random:
     path:     /generator/random
     defaults: { _controller: "BilimBundle:Student:randomGenerate" }
+
+counter:
+    path:     /counter/{number}/{test}
+    defaults: { _controller: "BilimBundle:Student:counter" }

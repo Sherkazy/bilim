@@ -24,7 +24,7 @@ class BilimController extends Controller
         $bilims = $em->getRepository('BilimBundle:Bilim')->findAll();
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $bilims, $request->query->getInt('page', 1), 20
+            $bilims, $request->query->getInt('page', 1), 120
         );
 
         return $this->render('BilimBundle:Bilim:index.html.twig', array(

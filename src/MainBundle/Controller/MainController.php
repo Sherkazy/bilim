@@ -17,7 +17,12 @@ class MainController extends Controller
 	{
 		$test   = $this->getDoctrine()->getRepository('BilimBundle:Test')->findAll();
 		$result = null;
-		return $this->render('MainBundle:Main:index.html.twig', array('test' => $test, 'result' => $result));
+		$testResult = null;
+		return $this->render('MainBundle:Main:index.html.twig', array(
+			'test' => $test,
+			'result' => $result,
+			'test_result' => $testResult
+		));
 	}
 
 	/**
@@ -26,17 +31,35 @@ class MainController extends Controller
 	 */
 	public function resultAction()
 	{
-		$result = $_POST['select'];
-		$test   = $this->getDoctrine()->getRepository('BilimBundle:Test')
-					   ->createQueryBuilder('test')
-					   ->where('test.name=:name')
-					   ->setParameter('name', $result)
+		$result     = $_POST['select'];
+		$testResult = $this->getDoctrine()->getRepository('BilimBundle:Test')
+						   ->createQueryBuilder('test')
+						   ->where('test.name=:name')
+						   ->setParameter('name', $result)
+						   ->getQuery()
+						   ->getOneOrNullResult();
+
+		$result = $this->getDoctrine()->getRepository('BilimBundle:Student')
+					   ->createQueryBuilder('student')
+					   ->where('student.test =:test')
+					   ->orderBy('student.general', 'ASC')
+					   ->setParameter('test', $testResult)
 					   ->getQuery()
-					   ->getOneOrNullResult();
+					   ->getResult();
+		$test   = $this->getDoctrine()->getRepository('BilimBundle:Test')->findAll();
 
-		$result = $this->getDoctrine()->getRepository('BilimBundle:Student')->findByTest($test);
-    	$test   = $this->getDoctrine()->getRepository('BilimBundle:Test')->findAll();
+		$array = array();
+		for ($i = 0; $i < 100; $i++) {
+			array_push($array, $i);
+		}
 
-        return $this->render('MainBundle:Main:index.html.twig', array('test' => $test, 'result' => $result));
-    }
+		return $this->render('MainBundle:Main:index.html.twig', array(
+			'array'       => $array,
+			'test'        => $test,
+			'result'      => $result,
+			'test_result' => $testResult
+		));
+	}
+
+
 }

@@ -30,7 +30,7 @@ class Bilim
     private $suroo;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BilimBundle\Entity\Student",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="BilimBundle\Entity\Student",cascade={"persist", "remove"})
      * @ORM\JoinColumns({
      * @ORM\JoinColumn(name="student_id", referencedColumnName="id", onDelete="SET NULL")
      * })

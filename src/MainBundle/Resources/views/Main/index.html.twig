@@ -21,7 +21,7 @@
             <div class="chart-container">
                 <div class="container">
                     <div class="row chart-panel">
-                        <div class="col-xs-4 text-center">
+                        <div class="col-xs-12 text-center">
                             <div class="single-chart">
                                 <canvas id="myChart1" width="" height=""></canvas>
                                 <h4>Result EXAM</h4>
@@ -40,28 +40,31 @@
 
 {% block script %}
     <!-- Example row of columns -->
-    <div class="row">
-        <script type="text/javascript">
-            var ctx = document.getElementById('myChart1');
-            var myChart1 = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: [
-                        {% for student in result %}
-                        '',
-                        {% endfor %}
-                    ],
-                    datasets: [{
-                        label: 'возраст',
-                        data: [
-                            {% for student in result %}
-                                {{ student.general }},
+    {% if result %}
+        <div class="row">
+            <script type="text/javascript">
+                var ctx = document.getElementById('myChart1');
+                var myChart1 = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [
+                            {% for item in array %}
+                            {{ item }},
                             {% endfor %}
                         ],
-                        backgroundColor: "rgba(54,45,237,0.7)"
-                    }]
-                }
-            });
-        </script>
-    </div>
+                        datasets: [{
+                            label: 'возраст',
+                            data: [
+                                {% for item in array %}
+                                {{ render(path('counter',{'number':item, 'test':test_result.id})
+                                ) }},
+                                {% endfor %}
+                            ],
+                            backgroundColor: "rgba(54,45,237,0.7)"
+                        }]
+                    }
+                });
+            </script>
+        </div>
+    {% endif %}
 {% endblock %}
