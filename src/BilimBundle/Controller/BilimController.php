@@ -164,6 +164,29 @@ class BilimController extends Controller
         return $this->redirect($this->generateUrl('bilim_index'));
     }
 
+    public function insertAction($stuId = 1)
+    {
+        $test = $_POST['test'];
+        $test = $this->getDoctrine()->getRepository('BilimBundle:Test')->find($test);
+        $suroos = $this->getDoctrine()->getRepository('BilimBundle:Suroo')->findAll();
+        $student = $this->getDoctrine()->getRepository('BilimBundle:Student')->findBy(
+            array('test' => $test),
+            array('id' => 'ASC'));
+        $em = $this->getEm();
+        $min = $suroos[0]->getId();
+        $max = $suroos[count($suroos) - 1]->getId();
+
+        foreach ($student as $item) {
+            $randomNumbers = range($min, $max);
+            shuffle($randomNumbers);
+
+
+        }
+
+    }
+
+
+
     public function getRep()
     {
         return $this->getDoctrine()->getRepository('BilimBundle:Bilim');
