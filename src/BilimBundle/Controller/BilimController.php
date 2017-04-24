@@ -18,17 +18,20 @@ class BilimController extends Controller
      */
     public function indexAction()
     {
+
         $em = $this->getDoctrine()->getManager();
         $request = new Request();
         $test = $this->getDoctrine()->getRepository('BilimBundle:Test')->findAll();
-        $bilims = $em->getRepository('BilimBundle:Bilim')->findAll();
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $bilims, $request->query->getInt('page', 1), 120
-        );
+//        $bilims = $em->getRepository('BilimBundle:Bilim')->findAll();
+//        die('keldi');
+//        $paginator = $this->get('knp_paginator');
+//        $pagination = $paginator->paginate(
+//            $bilims, $request->query->getInt('page', 1), 120
+//        );
+
 
         return $this->render('BilimBundle:Bilim:index.html.twig', array(
-            'bilims' => $pagination,
+//            'bilims' => $pagination,
             'tests' => $test
         ));
     }
@@ -118,11 +121,11 @@ class BilimController extends Controller
                     $bilim->setStudent($this->getStu()->find($rand));
                     $bilim->setSuroo($item);
                     $em->persist($bilim);
-                    if($i == 100){
+                    if ($i == 100) {
                         $em->flush();
                     }
                     $i++;
-                    if(count($randomNumbers)*85/100 == $i){
+                    if (count($randomNumbers) * 85 / 100 == $i) {
                         $em->flush();
                         break;
                     }
@@ -134,11 +137,11 @@ class BilimController extends Controller
                     $bilim->setStudent($this->getStu()->find($rand));
                     $bilim->setSuroo($item);
                     $em->persist($bilim);
-                    if($i == 100){
+                    if ($i == 100) {
                         $em->flush();
                     }
                     $i++;
-                    if(count($randomNumbers)*60/100 == $i){
+                    if (count($randomNumbers) * 60 / 100 == $i) {
                         $em->flush();
                         break;
                     }
@@ -150,11 +153,11 @@ class BilimController extends Controller
                     $bilim->setStudent($this->getStu()->find($rand));
                     $bilim->setSuroo($item);
                     $em->persist($bilim);
-                    if($i == 100){
+                    if ($i == 100) {
                         $em->flush();
                     }
                     $i++;
-                    if(count($randomNumbers)*35/100 == $i){
+                    if (count($randomNumbers) * 35 / 100 == $i) {
                         $em->flush();
                         break;
                     }
@@ -173,18 +176,58 @@ class BilimController extends Controller
             array('test' => $test),
             array('id' => 'ASC'));
         $em = $this->getEm();
+        $em = $this->getDoctrine()->getEntityManager();
         $min = $suroos[0]->getId();
         $max = $suroos[count($suroos) - 1]->getId();
+        $p = 0.16;
+        $count = count($student);
 
-        foreach ($student as $item) {
+        $arr = array(0.01, 0.03, 0.3, 2.13, 7.24, 12.98, 15.11, 13.86, 11.35, 9.18, 7.49, 5.9, 4.49, 3.41, 2.47, 1.75, 1.15, 0.72, 0.3, 0.12, 0.01);
+        foreach ($student as $key1 => $item) {
             $randomNumbers = range($min, $max);
             shuffle($randomNumbers);
+            $value = "";
 
+            foreach ($arr as $a) {
+//                dump(count($student) * ($a / 100));
+//                die('keldi');
+                if (count($student) * $a / 100 <= $key1) {
+                    foreach ($randomNumbers as $key => $ranNum) {
 
+                        $sur = $em->getRepository('BilimBundle:Suroo')->find($ranNum);
+                        if ($sur->getDifficulty() == 1) {
+                            if (count($randomNumbers) / 3 * $p * 0.6 < $key)
+                                if (count($randomNumbers) - 1 == $key)
+                                    $value .= '(' . $ranNum . ',' . $item->getId() . ');';
+                                else
+                                    $value .= '(' . $ranNum . ',' . $item->getId() . '),';
+                        } elseif ($sur->getDifficulty() == 2) {
+                            if (count($randomNumbers) / 3 * $p * 0.3 < $key)
+                                if (count($randomNumbers) - 1 == $key)
+                                    $value .= '(' . $ranNum . ',' . $item->getId() . ');';
+                                else
+                                    $value .= '(' . $ranNum . ',' . $item->getId() . '),';
+                        } elseif ($sur->getDifficulty() == 3) {
+                            if (count($randomNumbers) / 3 * $p * 0.1 < $key)
+                                if (count($randomNumbers) - 1 == $key)
+                                    $value .= '(' . $ranNum . ',' . $item->getId() . ');';
+                                else
+                                    $value .= '(' . $ranNum . ',' . $item->getId() . '),';
+                        }
+                        $p += 0.04;
+                    }
+                }
+            }
+            if ($value != ""){
+                $sql = "Insert into bilim (suroo_id, student_id) VALUES $value";
+
+            $stmt = $em->getConnection()->prepare($sql);
+            $stmt->execute();
+            }
         }
 
+        return $this->redirect($this->generateUrl('bilim_index'));
     }
-
 
 
     public function getRep()

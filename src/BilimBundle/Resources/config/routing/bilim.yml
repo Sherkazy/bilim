@@ -26,3 +26,8 @@ bilim_delete:
 bilim_generator:
     path:     /bilim/generate
     defaults: { _controller: "BilimBundle:Bilim:generate" }
+
+
+bilim_insert:
+    path:     /insert
+    defaults: { _controller: "BilimBundle:Bilim:insert" }
