@@ -182,48 +182,72 @@ class BilimController extends Controller
         $p = 0.16;
         $count = count($student);
 
-        $arr = array(0.01, 0.03, 0.3, 2.13, 7.24, 12.98, 15.11, 13.86, 11.35, 9.18, 7.49, 5.9, 4.49, 3.41, 2.47, 1.75, 1.15, 0.72, 0.3, 0.12, 0.01);
-        foreach ($student as $key1 => $item) {
-            $randomNumbers = range($min, $max);
-            shuffle($randomNumbers);
-            $value = "";
+        $minStu = $student[0]->getId();
+        $maxStu = $student[count($student) - 1]->getId();
+        $randomStudent = range($minStu, $maxStu);
+        shuffle($randomStudent);
 
-            foreach ($arr as $a) {
-//                dump(count($student) * ($a / 100));
-//                die('keldi');
-                if (count($student) * $a / 100 <= $key1) {
+        $arr = array(0.01, 0.03, 0.3, 2.13, 7.24, 12.98, 15.11, 13.86, 11.35, 9.18, 7.49, 5.9, 4.49, 3.41, 2.47, 1.75, 1.15, 0.72, 0.3, 0.12, 0.01);
+        $check = 0;
+        foreach ($arr as $a) {
+
+            for ($key1 = $check; $key1 < count($randomStudent) * $a / 100; $key1++) {
+
+                $randomNumbers = range($min, $max);
+                shuffle($randomNumbers);
+                $value = "";
+
+
+//                dump($key1);
+//                dump($randomStudent[$key1]);
+
                     foreach ($randomNumbers as $key => $ranNum) {
 
                         $sur = $em->getRepository('BilimBundle:Suroo')->find($ranNum);
+
                         if ($sur->getDifficulty() == 1) {
-                            if (count($randomNumbers) / 3 * $p * 0.6 < $key)
-                                if (count($randomNumbers) - 1 == $key)
-                                    $value .= '(' . $ranNum . ',' . $item->getId() . ');';
-                                else
-                                    $value .= '(' . $ranNum . ',' . $item->getId() . '),';
+                            if (count($randomNumbers) / 3 * $p * 0.6 > $key)
+                                if (count($randomNumbers) - 1 == $key) {
+                                    $value .= '(' . $ranNum . ',' . $randomStudent[$key1] . ');';
+                                } else {
+                                    $value .= '(' . $ranNum . ',' . $randomStudent[$key1] . '),';
+                                }
                         } elseif ($sur->getDifficulty() == 2) {
-                            if (count($randomNumbers) / 3 * $p * 0.3 < $key)
-                                if (count($randomNumbers) - 1 == $key)
-                                    $value .= '(' . $ranNum . ',' . $item->getId() . ');';
-                                else
-                                    $value .= '(' . $ranNum . ',' . $item->getId() . '),';
+                            if (count($randomNumbers) / 3 * $p * 0.3 > $key)
+                                if (count($randomNumbers) - 1 == $key) {
+                                    $value .= '(' . $ranNum . ',' . $randomStudent[$key1] . ');';
+                                } else {
+                                    $value .= '(' . $ranNum . ',' . $randomStudent[$key1] . '),';
+                                }
                         } elseif ($sur->getDifficulty() == 3) {
-                            if (count($randomNumbers) / 3 * $p * 0.1 < $key)
-                                if (count($randomNumbers) - 1 == $key)
-                                    $value .= '(' . $ranNum . ',' . $item->getId() . ');';
-                                else
-                                    $value .= '(' . $ranNum . ',' . $item->getId() . '),';
+
+                            if (count($randomNumbers) / 3 * $p * 0.1 > $key)
+                                if (count($randomNumbers) - 1 == $key) {
+                                    $value .= '(' . $ranNum . ',' . $randomStudent[$key1] . ');';
+                                } else {
+                                    $value .= '(' . $ranNum . ',' . $randomStudent[$key1] . '),';
+                                }
                         }
+
+
                         $p += 0.04;
+
                     }
+
+                if ($value != "") {
+                    $sql = "Insert into bilim (suroo_id, student_id) VALUES $value";
+
+                    $stmt = $em->getConnection()->prepare($sql);
+                    $stmt->execute();
                 }
             }
-            if ($value != ""){
-                $sql = "Insert into bilim (suroo_id, student_id) VALUES $value";
 
-            $stmt = $em->getConnection()->prepare($sql);
-            $stmt->execute();
-            }
+            $check = count($randomStudent) * $a / 100;
+//            dump($check);
+//            die();
+
+
+
         }
 
         return $this->redirect($this->generateUrl('bilim_index'));

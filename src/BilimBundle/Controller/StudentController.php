@@ -78,7 +78,7 @@ class StudentController extends Controller
 		$test   = $this->getDoctrine()->getRepository('BilimBundle:Test')->find($test);
 		$region = $this->getDoctrine()->getRepository('BilimBundle:Region')->find(1);
 		$em     = $this->getDoctrine()->getManager();
-		$size   = 1000;
+		$size   = 10000;
 		for ($item = 1; $item <= $size; $item++) {
 			$numbers = rand(1, 9);
 			$region  = $this->getDoctrine()->getRepository('BilimBundle:Region')->find($numbers);
