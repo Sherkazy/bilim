@@ -37,13 +37,13 @@ class MainController extends Controller
 						   ->where('test.name=:name')
 						   ->setParameter('name', $result)
 						   ->getQuery()
-						   ->getOneOrNullResult();
+						   ->getResult();
 
 		$result = $this->getDoctrine()->getRepository('BilimBundle:Student')
 					   ->createQueryBuilder('student')
 					   ->where('student.test =:test')
 					   ->orderBy('student.general', 'ASC')
-					   ->setParameter('test', $testResult)
+					   ->setParameter('test', $testResult[0])
 					   ->getQuery()
 					   ->getResult();
 		$test   = $this->getDoctrine()->getRepository('BilimBundle:Test')->findAll();
@@ -57,7 +57,7 @@ class MainController extends Controller
 			'array'       => $array,
 			'test'        => $test,
 			'result'      => $result,
-			'test_result' => $testResult
+			'test_result' => $testResult[0]
 		));
 	}
 

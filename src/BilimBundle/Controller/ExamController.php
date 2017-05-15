@@ -187,39 +187,59 @@ class ExamController extends Controller
         $i = 0;
 
 
-        foreach ($students as $key => $stu) {
+//        foreach ($students as $key => $stu) {
+        $stu = $this->getStu()->find(57008);
+            $est = 0;
+            $hum = 0;
+            dump(count($exam->getSuroo()));
             foreach ($exam->getSuroo() as $exa) {
-                $sur = $this->getSur()->find($exa);
+//                $sur = $this->getSur()->find($exa);
+//                $bilim = null;
+
+//                $bilim = $this->getBil()->createQueryBuilder('bilim')
+//                    ->where('bilim.student =:student')
+//                    ->andWhere('bilim.suroo =:suroo')
+//                    ->setParameter('student', $stu)
+//                    ->setParameter('suroo', $sur)
+//                    ->getQuery()
+//                    ->getResult();
+
+                $query = $this->getEm()->createQuery("SELECT bilim.student_id, bilim.suroo_id FROM bilim  WHERE bilim.student_id = 57008 AND bilim.suroo_id = $exa");
+                $result = $query->getResult();
+//                $stmt = $this->getEm()->getConnection()->prepare($sql);
+//                $stmt->execute();
+                dump($result);
+                die();
 
 
-                $bilim = $this->getBil()->createQueryBuilder('bilim')
-                    ->where('bilim.student =:student')
-                    ->andWhere('bilim.suroo =:suroo')
-                    ->setParameter('student', $stu)
-                    ->setParameter('suroo', $sur)
-                    ->getQuery()
-                    ->getResult();
-
-                if ($bilim) {
+                if ($bilim != null) {
                     if ($bilim[0]->getSuroo()->getSubject()->getType()->getName() == 'естественные') {
-                        $stu->setScience(($bilim[0]->getSuroo()->getDifficulty()) + $stu->getScience());
-
-                    }
-                    if ($bilim[0]->getSuroo()->getSubject()->getType()->getName() == 'гуманитарный') {
-                        $stu->setHumanitary(($bilim[0]->getSuroo()->getDifficulty()) + $stu->getHumanitary());
+                        $est = $est + $bilim[0]->getSuroo()->getDifficulty();
+                        dump('est->'.$est.' suroo->'.$exa);
+//                        dump($hum);
+//                        dump($stu);
+//                        $stu->setScience(($bilim[0]->getSuroo()->getDifficulty()) + $stu->getScience());
+//                        $this->getEm()->persist($stu);
+                    } else {
+                        $hum = $hum + $bilim[0]->getSuroo()->getDifficulty();
+                        dump('hum->'.$hum.' suroo->'.$exa);
+//                        $stu->setHumanitary(($bilim[0]->getSuroo()->getDifficulty()) + $stu->getHumanitary());
+//                        $this->getEm()->persist($stu);
                     }
                 }
             }
-            $stu->setGeneral(($stu->getScience() + $stu->getHumanitary()) / 2);
+
+            die();
+            $stu->setScience($est);
+            $stu->setHumanitary($hum);
+            $stu->setGeneral(($est + $hum) / 2);
             $this->getEm()->persist($stu);
 
-//            if($i==50 || count($students)-1 == $i){
-//            die('keldi');
-            $this->getEm()->flush();
-//            }
-
+            if ($i == 100 || count($students) - 1 == $i) {
+                $this->getEm()->flush();
+            }
             $i++;
-        }
+//        }
 
         return $this->redirect($this->generateUrl('student_index'));
     }

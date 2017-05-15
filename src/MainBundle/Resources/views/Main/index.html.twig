@@ -56,8 +56,7 @@
                             label: 'возраст',
                             data: [
                                 {% for item in array %}
-                                {{ render(path('counter',{'number':item, 'test':test_result.id})
-                                ) }},
+                                {{ render(path('counter',{'number':item, 'test':test_result.id})) }},
                                 {% endfor %}
                             ],
                             backgroundColor: "rgba(54,45,237,0.7)"
